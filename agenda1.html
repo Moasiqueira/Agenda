@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Monique Siqueira" />
+    <title>Agenda</title>
+  </head>
+  <body>
+    <script>
+      
+      let arrUsers = [];
+
+      function showMenu() {
+        return parseInt(
+          prompt(`
+                *****Menu*****
+                [1] - Adicionar contato
+                [2] - Listar contatos
+                [3] - Atualizar contato
+                [4] - Excluir contato
+                [5] - Sair da Agenda
+            `)
+        );
+      }
+
+      
+      const AddUser = () => {
+        const nameUser = prompt("Informe o nome:");
+        const telefoneUser = prompt("Informe o telefone:");
+        const emailUser = prompt("Informe o email:");
+        const dataCriacao = new Date();
+
+        if (!nameUser || !emailUser || !telefoneUser) {
+          alert("Os campos são obrigatórios! ");
+        }
+
+
+        arrUsers.push({ nameUser, emailUser, telefoneUser, dataCriacao });
+
+        console.log(arrUsers);
+      };
+
+      
+      const ListUser = () => {
+        let listUser = "";
+
+        arrUsers.forEach((dataUser) => {
+          listUser += ` 
+          Nome: ${dataUser.nameUser},Telefone: ${dataUser.telefoneUser}, 
+          Email: ${dataUser.emailUser}, Data: ${dataUser.dataCriacao}`;
+        });
+
+        console.log(listUser);
+
+        alert("*****Lista de usuários*****" + listUser);
+      };
+
+    function UpdateUserInfo() {
+        const findTelefone = prompt("Informe o telefone que você deseja atualizar:");
+        const usuarioEncontrado = arrUsers.find(
+          (user) => user.telefoneUser === findTelefone
+        );
+
+        if (!usuarioEncontrado) {
+          alert("Usuário não foi encontrado!");
+
+          return;
+        }
+
+        const novoTelefone = prompt("Informe o novo Telefone ");
+        const novoNomeUsuario = prompt("Informe o nome: ");
+       
+        novoTelefone ? (usuarioEncontrado.telefoneUser = novoTelefone) : null;
+
+        if (novoNomeUsuario) {
+          usuarioEncontrado.nameUser = novoNomeUsuario;
+        }
+
+        alert("Usuário foi atualizado com sucesso!");
+      }
+
+     
+	function DeleteUser() {
+        const telefoneDelete = prompt("Informe o telefone para excluir:")
+        const indiceDelete = arrUsers.findIndex(telefone => telefone.telefoneUser === telefoneDelete)
+      
+
+        const confirmacao = window.confirm(`Você deseja mesmo excluir o usuário ${telefoneDelete}`)
+
+        if (confirmacao) {
+            arrUsers.splice(indiceDelete, 1)
+        }
+
+        alert("Usuário deletado com sucesso!")
+      }
+
+
+      let opcaoUser = true;
+
+      while (opcaoUser) {
+        switch (showMenu()) {
+          case 1:
+            AddUser();
+            break;
+          case 2:
+            ListUser();
+            break;
+          case 3:
+            UpdateUserInfo();
+            break;
+          case 4:
+            DeleteUser();
+            break;
+          case 5:
+            alert("Saindo do programa, até mais!");
+            opcaoUser = false;
+            break;
+          default:
+            alert("Opção inválida! Tente novamente");
+            break;
+        }
+      }
+    </script>
+  </body>
+</html>
