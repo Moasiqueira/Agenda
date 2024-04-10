@@ -1,4 +1,4 @@
-#  EXERCICIO AGENDA
+#  AGENDA EXERCICIO
 
 Instruções
 Crie uma agenda de contatos que permita adicionar, visualizar, editar e excluir contatos (CRUD).
